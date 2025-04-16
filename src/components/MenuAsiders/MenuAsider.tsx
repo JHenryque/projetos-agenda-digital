@@ -3,22 +3,29 @@ import style from "./MenuAsider.module.css";
 
 export default function MenuAsider() {
   return (
-    <aside>
-      <nav>
+    <aside className={style._asider}>
+      <nav className={style.nav_asider}>
         <ul className={style.nav_menu}>
-          <li>
-            <NavLink to="/">Inicio</NavLink>
+          <li className={style.nav_item + " " + style.active}>
+            <NavLink to="/">
+              <i className="fa-solid fa-house-chimney-user"></i> Inicio
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/add-agenda">ADD Novo Agenda</NavLink>
+            <NavLink to="/add-agenda">
+              <i className="fa-regular fa-calendar-plus"></i> ADD Novo Agenda
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/add-lembrete">ADD Novo Lembrete</NavLink>
+            <NavLink to="/add-lembrete">
+              <i className="fa-regular fa-calendar-days"></i> ADD Novo Lembrete
+            </NavLink>
           </li>
         </ul>
-
+      </nav>
+      <nav>
         <ul className={style.nav_mobile}>
-          <li>
+          <li className={style.mobile_item + " " + style.active_mobile}>
             <NavLink to="/">
               <i className="fa-solid fa-house-chimney-user"></i>
             </NavLink>

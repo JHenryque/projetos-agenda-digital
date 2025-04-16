@@ -108,6 +108,9 @@ export default function Home() {
                 <b>Data Agendado: </b> 15/04/2025
               </li>
               <li>
+                <b>Horário:</b> 08:00 - 09:00
+              </li>
+              <li>
                 <b>Observação:</b> Observação do cliente
               </li>
             </ul>
@@ -140,6 +143,9 @@ export default function Home() {
               </li>
               <li>
                 <b>Data Agendado: </b> 15/04/2025
+              </li>
+              <li>
+                <b>Horário:</b> 08:00 - 09:00
               </li>
               <li>
                 <b>Observação:</b> Observação do cliente

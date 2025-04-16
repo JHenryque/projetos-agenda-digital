@@ -1,7 +1,17 @@
+import style from "./modal.module.css";
+
 export default function AddLembrete() {
   return (
-    <div>
-      <h1>ADD Lembrete</h1>
+    <div className={style.modal}>
+      <form action="#" className={style.form_}>
+        <h2>Formulario de Lembrete</h2>
+        <label htmlFor="">Nome:</label>
+        <input type="text" placeholder="Digite o nome" />
+        <label htmlFor="">Descrição:</label>
+        <input type="text" placeholder="Digite a descrição" />
+        <label htmlFor="">Data:</label>
+        <input type="date" placeholder="Digite a data" />
+      </form>
     </div>
   );
 }

@@ -12,7 +12,6 @@ legend {
 .container_home {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 30px;
   width: 100%;
   padding: 1rem 2%;
@@ -25,6 +24,14 @@ legend {
   border-radius: 10px;
   border: 2px solid #b1acac;
   padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.agenda {
+  margin-bottom: 60px;
 }
 
 .acoes {
@@ -53,6 +60,7 @@ legend {
   flex-direction: row-reverse;
   justify-content: space-between;
   padding: 1rem 0;
+  gap: 10px;
 }
 
 .card_lembretes ul {
@@ -72,4 +80,31 @@ legend {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.card_lembretes,
+.card_agenda {
+  border: 1px solid #b1acac;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 5px 1px #b1acac;
+}
+
+@media only screen and (min-width: 828px) {
+  .container_home {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 280px;
+  }
+
+  .agenda,
+  .lembretes {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 1rem 2%;
+    width: 100%;
+  }
 }
