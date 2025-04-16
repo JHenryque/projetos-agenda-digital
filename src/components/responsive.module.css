@@ -1,0 +1,9 @@
+@media (min-width: 770px) {
+  .nav_menu {
+    display: block;
+  }
+
+  .nav_mobile {
+    display: none;
+  }
+}

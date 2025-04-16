@@ -1,0 +1,42 @@
+@import url("../responsive.module.css");
+
+.nav_menu {
+  display: none;
+}
+
+.nav_mobile {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #4384b9;
+  height: 50px;
+}
+
+.nav_mobile li {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: aliceblue;
+  align-self: center;
+  background-color: black;
+  padding: 0px 5px 3px 5px;
+  border-radius: 5px;
+
+  & i {
+    color: aliceblue;
+  }
+}
+
+@media only screen and (min-width: 770px) {
+  .nav_menu {
+    display: block;
+  }
+
+  .nav_mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,23 @@
+.container_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8%;
+  align-items: center;
+  background-color: #464646;
+  color: #fff;
+  height: 50px;
+  position: fixed;
+  width: 100%;
+}
+
+.container_header span {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: aliceblue;
+  align-self: center;
+}
+
+.container_header strong {
+  color: #61dafbaa;
+}

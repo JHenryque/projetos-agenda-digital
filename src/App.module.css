@@ -1,0 +1,21 @@
+.container_layout {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 100px;
+}
+
+/* .logo {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+@media only screen and (min-width: 770px) {
+  .container_layout {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    width: 100%;
+  }
+}
