@@ -8,7 +8,7 @@ export default function AddLembrete() {
         <label htmlFor="">Nome:</label>
         <input type="text" placeholder="Digite o nome" />
         <label htmlFor="">Descrição:</label>
-        <input type="text" placeholder="Digite a descrição" />
+        <textarea placeholder="Digite a descrição"></textarea>
         <label htmlFor="">Data:</label>
         <input type="date" placeholder="Digite a data" />
       </form>
