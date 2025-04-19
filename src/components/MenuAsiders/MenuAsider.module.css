@@ -17,12 +17,14 @@
 }
 
 li.active a {
-  background-color: aqua;
-  color: #1f1f1fe1;
+  background-color: rgb(255, 255, 255);
+  color: #000000e1;
+  font-weight: bold;
 }
 
 .nav_menu li a i {
   color: #1f1f1fe1;
+  font-size: 1.5rem;
 }
 
 /* ---  mobile  -------*/
@@ -53,9 +55,10 @@ li.active a {
   }
 }
 
-.active_mobile {
+li.active_mobile {
   background-color: rgb(3, 3, 3);
-  color: #1f1f1fe1;
+  padding: 8px 15px;
+  color: #4384b9;
 }
 
 @media only screen and (min-width: 828px) {
