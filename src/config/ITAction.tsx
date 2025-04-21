@@ -63,7 +63,8 @@ export const initialState: AgendaState = {
 
 export type AgendaAction =
   | { type: "setStatus"; payload: Status }
-  | { type: "setAgenda"; payload: Agendamento };
+  | { type: "setLembrete"; payload: Lembretes };
+
 // a type AgendaAction descreve as diferentes actions das quais podem ser executadas no reducer (AgendaUserContext, AgendaReducer)
 
 export interface AgendaUserContext {

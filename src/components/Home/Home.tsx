@@ -32,11 +32,6 @@ export default function Home() {
                 <legend>Agenda</legend>
 
                 <CardAgenda />
-                <CardAgenda />
-                <CardAgenda />
-                <CardAgenda />
-                <CardAgenda />
-                <CardAgenda />
               </fieldset>
             ) : (
               <h2>Agenda Vazia</h2>

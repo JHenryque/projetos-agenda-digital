@@ -27,6 +27,9 @@ function AgendaReducer(state: AgendaState, action: AgendaAction) {
   switch (action.type) {
     case "setStatus":
       return { ...state, status: action.payload };
+    case "setLembrete":
+      //console.log(newLembrete);
+      return { ...state };
     default:
       throw new Error("Ação desconhecida");
   }

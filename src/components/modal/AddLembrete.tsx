@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import style from "./modal.module.css";
+import { UserContext } from "../../config/UserContext";
 
 export default function AddLembrete() {
   const [lemCredentials, setLemCredentials] = useState({});
   const [errors, setErrors] = useState<string>("");
+
+  const { dispatch } = UserContext();
 
   function handleOnchange(e: string | any) {
     setLemCredentials({ ...lemCredentials, [e.target.name]: e.target.value });
@@ -26,8 +29,9 @@ export default function AddLembrete() {
     if (!event.name || !event.descricao || !event.data) {
       setErrors("Preencha todos os campos!");
     } else {
-      console.log(newLembrete);
+      dispatch({ type: "setLembrete", payload: newLembrete });
       setErrors("");
+      dispatch({ type: "setStatus", payload: "fetching" });
     }
   };
 
