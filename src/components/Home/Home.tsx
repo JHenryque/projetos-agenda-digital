@@ -15,7 +15,7 @@ export default function Home() {
         <h2>Erro ao carregar os dados</h2>
       ) : (
         <>
-          {state.lembretes.length != 0 ? (
+          {state.lembretes.length > 0 ? (
             <>
               <fieldset className={style.lembretes}>
                 <legend>Lembretes</legend>
@@ -27,7 +27,7 @@ export default function Home() {
           )}
 
           <div className="list_agenda">
-            {state.array.length != 0 ? (
+            {state.agendamento.length > 0 ? (
               <fieldset className={style.agenda}>
                 <legend>Agenda</legend>
 

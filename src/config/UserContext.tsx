@@ -1,14 +1,14 @@
 import { createContext, useContext, useReducer } from "react";
 import {
-  AgendaState,
   AgendaAction,
+  AgendaState,
   AgendaUserContext,
   initialState,
-} from "./ITAction.tsx";
+} from "./ITAction.ts";
 
 const StateContext = createContext<AgendaUserContext>({
   state: initialState,
-  dispatch: () => null,
+  dispatch: () => {},
 });
 
 export function UserProvider({ children }: { children: React.ReactElement }) {
@@ -23,13 +23,22 @@ export function UserProvider({ children }: { children: React.ReactElement }) {
 
 export const UserContext = () => useContext(StateContext);
 
-function AgendaReducer(state: AgendaState, action: AgendaAction) {
+function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
   switch (action.type) {
     case "setStatus":
       return { ...state, status: action.payload };
     case "setLembrete":
-      //console.log(newLembrete);
-      return { ...state };
+      console.log("reducer", action.payload);
+      return {
+        ...state,
+        lembretes: [...state.lembretes, action.payload],
+      };
+    case "setAgenda":
+      console.log("reducer", action.payload);
+      return {
+        ...state,
+        agendamento: [...state.agendamento, action.payload],
+      };
     default:
       throw new Error("Ação desconhecida");
   }

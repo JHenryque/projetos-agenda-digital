@@ -1,120 +1,101 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import style from "./modal.module.css";
+import { UserContext } from "../../config/UserContext";
+import { useNavigate } from "react-router";
 
 export default function AddAgenda() {
+  const { state, dispatch } = UserContext();
   const [errors, setErrors] = useState<string>("");
-  const [lemCredentials, setLemCredentials] = useState({});
-
-  function handleOnchange(e: string | any) {
-    setLemCredentials({ ...lemCredentials, [e.target.name]: e.target.value });
-  }
+  const navigate = useNavigate();
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
+    const id = state.lembretes.length
+      ? Math.max(...state.lembretes.map((todo) => todo.id)) + 1
+      : 1;
+    const name = document.querySelector("input[name='name']")?.value;
+    const telefone = document.querySelector("input[name='telefone']")?.value;
+    const endereco = document.querySelector("input[name='endereco']")?.value;
+    const numero = document.querySelector("input[name='numero']")?.value;
+    const cidade = document.querySelector("input[name='cidade']")?.value;
+    const barrio = document.querySelector("input[name='barrio']")?.value;
+    const data_agendado = document.querySelector(
+      "input[name='data_agendado']"
+    )?.value;
+    const horario = document.querySelector("input[name='horario']")?.value;
+    const observacao = document.querySelector(
+      "textarea[name='observacao']"
+    )?.value;
 
-    const newAgenda = {
-      name: lemCredentials.name,
-      telefone: lemCredentials.telefone,
-      endereco: lemCredentials.endereco,
-      numero: lemCredentials.numero,
-      cidade: lemCredentials.cidade,
-      barrio: lemCredentials.barrio,
-      data_agendado: lemCredentials.data_agendado,
-      horario: lemCredentials.horario,
-      observacao: lemCredentials.observacao,
-    };
-    handlerValidation(lemCredentials, newAgenda);
-  };
-
-  const handlerValidation = (event: any, newAgenda: any) => {
     if (
-      !event.name ||
-      !event.telefone ||
-      !event.endereco ||
-      !event.numero ||
-      !event.cidade ||
-      !event.barrio ||
-      event.data_agendado === "" ||
-      event.horario === "" ||
-      !event.observacao
+      !name ||
+      !telefone ||
+      !endereco ||
+      !numero ||
+      !cidade ||
+      !barrio ||
+      data_agendado == "" ||
+      horario == "" ||
+      observacao == ""
     ) {
       setErrors("*Preencha todos os campos!");
       return;
     } else {
-      console.log(newAgenda);
+      const newAgenda = {
+        id,
+        name,
+        telefone,
+        endereco,
+        numero,
+        cidade,
+        barrio,
+        data_agendado,
+        horario,
+        observacao,
+      };
+      dispatch({ type: "setAgenda", payload: newAgenda });
+      dispatch({ type: "setStatus", payload: "ready" });
       setErrors("");
+      navigate("/");
     }
   };
 
   return (
     <div className={style.modal}>
-      <form action="#" className={style.form_}>
+      <form action="#" className={style.form_} onSubmit={handleOnSubmit}>
         <h2>Formulario de Agenda</h2>
         <label htmlFor="nome">Nome:</label>
-        <input
-          type="text"
-          name="name"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite o Nome"
-        />
+        <input type="text" name="name" placeholder="Digite o Nome" />
         <label htmlFor="telefone">Telefone:</label>
-        <input
-          type="text"
-          name="telefone"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite o Telefone"
-        />
+        <input type="text" name="telefone" placeholder="Digite o Telefone" />
         <label htmlFor="endereco">Endereço:</label>
-        <input
-          type="text"
-          name="endereco"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite o Endereço"
-        />
+        <input type="text" name="endereco" placeholder="Digite o Endereço" />
         <label htmlFor="numero">N°:</label>
         <input
           type="text"
           name="numero"
-          onChange={(e) => handleOnchange(e)}
           placeholder="Digite o Numero da casa"
         />
         <label htmlFor="cidade">Cidade:</label>
-        <input
-          type="text"
-          name="cidade"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite a Cidade"
-        />
+        <input type="text" name="cidade" placeholder="Digite a Cidade" />
         <label htmlFor="barrio">Barrio:</label>
-        <input
-          type="text"
-          name="barrio"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite o Barrio"
-        />
+        <input type="text" name="barrio" placeholder="Digite o Barrio" />
         <label htmlFor="data-agendada">Data Marcada:</label>
         <input
           type="date"
-          name="data-agendada"
-          onChange={(e) => handleOnchange(e)}
+          name="data_agendado"
           placeholder="Digite a Data Agendada"
         />
         <label htmlFor="hora">Hora Marcada:</label>
-        <input
-          type="time"
-          name="horario"
-          onChange={(e) => handleOnchange(e)}
-          placeholder="Digite a Hora Marcada"
-        />
+        <input type="time" name="horario" placeholder="Digite a Hora Marcada" />
         <label htmlFor="observacao">Observação:</label>
         <textarea
           name="observacao"
-          onChange={(e) => handleOnchange(e)}
           placeholder="Digite a o Observação"
         ></textarea>
         {errors && <p className={style.errors}>{errors}</p>}
-        <button onClick={handleOnSubmit}>Salvar</button>
+        <button>Salvar</button>
       </form>
     </div>
   );

@@ -4,34 +4,30 @@ import style from "./modal.module.css";
 import { UserContext } from "../../config/UserContext";
 
 export default function AddLembrete() {
-  const [lemCredentials, setLemCredentials] = useState({});
+  const [name, setName] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [date, setDate] = useState("");
   const [errors, setErrors] = useState<string>("");
 
-  const { dispatch } = UserContext();
+  const { state, dispatch } = UserContext();
 
-  function handleOnchange(e: string | any) {
-    setLemCredentials({ ...lemCredentials, [e.target.name]: e.target.value });
-  }
-
-  const handleOnSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnSubmit = (e: any) => {
     e.preventDefault();
 
-    const newLembrete = {
-      name: lemCredentials.name,
-      descricao: lemCredentials.descricao,
-      data: lemCredentials.data,
-    };
-
-    handlerValidation(lemCredentials, newLembrete);
-  };
-
-  const handlerValidation = (event: any, newLembrete: any) => {
-    if (!event.name || !event.descricao || !event.data) {
+    if (!name || !descricao || !date) {
       setErrors("Preencha todos os campos!");
     } else {
+      console.log("Enviada com sucesso  !");
+      const id = state.lembretes.length
+        ? Math.max(...state.lembretes.map((todo) => todo.id)) + 1
+        : 1;
+      const newLembrete = { id, name, descricao, date };
       dispatch({ type: "setLembrete", payload: newLembrete });
       setErrors("");
-      dispatch({ type: "setStatus", payload: "fetching" });
+      dispatch({ type: "setStatus", payload: "ready" });
+      setName("");
+      setDescricao("");
+      setDate("");
     }
   };
 
@@ -42,22 +38,22 @@ export default function AddLembrete() {
         <label htmlFor="">Nome:</label>
         <input
           type="text"
-          name="name"
-          onChange={(e) => handleOnchange(e)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Digite o nome"
         />
         <label htmlFor="">Descrição:</label>
         <textarea
           placeholder="Digite a descrição"
-          name="descricao"
-          onChange={(e) => handleOnchange(e)}
+          value={descricao}
+          onChange={(e) => setDescricao(e.target.value)}
         ></textarea>
         <label htmlFor="">Data:</label>
         <input
           type="date"
-          name="data"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
           placeholder="Digite a data"
-          onChange={(e) => handleOnchange(e)}
         />
         {errors && <p className={style.errors}>{errors}</p>}
         <button onClick={handleOnSubmit} type="submit">
