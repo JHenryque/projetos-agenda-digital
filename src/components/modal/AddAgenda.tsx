@@ -2,18 +2,19 @@
 import { useState } from "react";
 import style from "./modal.module.css";
 import { UserContext } from "../../config/UserContext";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 export default function AddAgenda() {
   const { state, dispatch } = UserContext();
   const [errors, setErrors] = useState<string>("");
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
-    const id = state.lembretes.length
-      ? Math.max(...state.lembretes.map((todo) => todo.id)) + 1
-      : 1;
+    const id =
+      state.agendamento.length > 0
+        ? Math.max(...state.agendamento.map((todo) => todo.id)) + 1
+        : 1;
     const name = document.querySelector("input[name='name']")?.value;
     const telefone = document.querySelector("input[name='telefone']")?.value;
     const endereco = document.querySelector("input[name='endereco']")?.value;
@@ -57,7 +58,15 @@ export default function AddAgenda() {
       dispatch({ type: "setAgenda", payload: newAgenda });
       dispatch({ type: "setStatus", payload: "ready" });
       setErrors("");
-      navigate("/");
+      document.querySelector("input[name='name']").value = "";
+      document.querySelector("input[name='telefone']").value = "";
+      document.querySelector("input[name='endereco']").value = "";
+      document.querySelector("input[name='numero']").value = "";
+      document.querySelector("input[name='cidade']").value = "";
+      document.querySelector("input[name='barrio']").value = "";
+      document.querySelector("input[name='data_agendado']").value = "";
+      document.querySelector("input[name='horario']").value = "";
+      document.querySelector("textarea[name='observacao']").value = "";
     }
   };
 

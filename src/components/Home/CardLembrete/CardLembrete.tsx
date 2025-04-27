@@ -1,7 +1,13 @@
 import { UserContext } from "../../../config/UserContext";
 import style from "../Home.module.css";
 
-export default function CardLembrete() {
+export default function CardLembrete({
+  handlerEdtion,
+  handlerDelete,
+}: {
+  handlerEdtion: (id: number) => void;
+  handlerDelete: (id: number) => void;
+}) {
   const { state } = UserContext();
 
   console.log("status", state.status);
@@ -12,10 +18,10 @@ export default function CardLembrete() {
       {state.lembretes.map((item) => (
         <div className={style.card_lembretes} key={item.id}>
           <div className={style.acoes}>
-            <span>
+            <span onClick={() => handlerEdtion(item.id)}>
               <i className="fa-solid fa-pen"></i>
             </span>
-            <span>
+            <span onClick={() => handlerDelete(item.id)}>
               <i className="fa-solid fa-trash"></i>
             </span>
           </div>

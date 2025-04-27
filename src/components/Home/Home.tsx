@@ -7,6 +7,18 @@ import Loader from "../FullPageLoader/FullPageLoader";
 export default function Home() {
   const { state } = UserContext();
 
+  function handlerEdtion(id: number) {
+    if (confirm(`Deseja editar? ${id}`)) {
+      console.log("vc clicou para editar", id);
+    }
+  }
+
+  function handlerDelete(id: number) {
+    if (confirm(`Deseja deletar? ${id}`)) {
+      console.log("vc clicou para editar", id);
+    }
+  }
+
   return (
     <section className={style.container_home}>
       {state.status === "fetching" ? (
@@ -19,7 +31,10 @@ export default function Home() {
             <>
               <fieldset className={style.lembretes}>
                 <legend>Lembretes</legend>
-                <CardLembrete />
+                <CardLembrete
+                  handlerEdtion={handlerEdtion}
+                  handlerDelete={handlerDelete}
+                />
               </fieldset>
             </>
           ) : (
@@ -31,7 +46,10 @@ export default function Home() {
               <fieldset className={style.agenda}>
                 <legend>Agenda</legend>
 
-                <CardAgenda />
+                <CardAgenda
+                  handlerEdtion={handlerEdtion}
+                  handlerDelete={handlerDelete}
+                />
               </fieldset>
             ) : (
               <h2>Agenda Vazia</h2>
