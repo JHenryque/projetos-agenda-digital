@@ -5,7 +5,7 @@ import style from "./Home.module.css";
 import Loader from "../FullPageLoader/FullPageLoader";
 
 export default function Home() {
-  const { state } = UserContext();
+  const { state, dispatch } = UserContext();
 
   function handlerEdtion(id: number) {
     if (confirm(`Deseja editar? ${id}`)) {
@@ -13,10 +13,16 @@ export default function Home() {
     }
   }
 
-  function handlerDelete(id: number) {
-    if (confirm(`Deseja deletar? ${id}`)) {
-      console.log("vc clicou para editar", id);
+  function handlerDelete(id: number, tipo: string) {
+    if (confirm(`Deseja deletar?`)) {
+      if (tipo === "lembrete") {
+        dispatch({ type: "setDeleteLembrete", payload: id });
+      } else {
+        dispatch({ type: "setDeleteAgendamento", payload: id });
+      }
     }
+    dispatch({ type: "setStatus", payload: "ready" });
+    return id;
   }
 
   return (

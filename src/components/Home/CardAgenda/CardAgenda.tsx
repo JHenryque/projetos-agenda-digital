@@ -5,7 +5,7 @@ export default function CardAgenda({
   handlerDelete,
 }: {
   handlerEdtion: (id: number) => void;
-  handlerDelete: (id: number) => void;
+  handlerDelete: (id: number, tipo: any) => void;
 }) {
   const { state } = UserContext();
 
@@ -17,7 +17,7 @@ export default function CardAgenda({
             <span onClick={() => handlerEdtion(item.id)}>
               <i className="fa-solid fa-pen"></i>
             </span>
-            <span onClick={() => handlerDelete(item.id)}>
+            <span onClick={() => handlerDelete(item.id, item.tipo)}>
               <i className="fa-solid fa-trash"></i>
             </span>
           </div>

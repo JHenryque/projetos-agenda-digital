@@ -21,7 +21,8 @@ export default function AddLembrete() {
       const id = state.lembretes.length
         ? Math.max(...state.lembretes.map((todo) => todo.id)) + 1
         : 1;
-      const newLembrete = { id, name, descricao, date };
+
+      const newLembrete = { id, tipo: "lembrete", name, descricao, date };
       dispatch({ type: "setLembrete", payload: newLembrete });
       setErrors("");
       dispatch({ type: "setStatus", payload: "ready" });

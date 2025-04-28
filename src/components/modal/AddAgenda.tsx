@@ -45,6 +45,7 @@ export default function AddAgenda() {
     } else {
       const newAgenda = {
         id,
+        tipo: "Agendamento",
         name,
         telefone,
         endereco,
@@ -56,7 +57,7 @@ export default function AddAgenda() {
         observacao,
       };
       dispatch({ type: "setAgenda", payload: newAgenda });
-      dispatch({ type: "setStatus", payload: "ready" });
+      dispatch({ type: "setStatus", payload: "fetching" });
       setErrors("");
       document.querySelector("input[name='name']").value = "";
       document.querySelector("input[name='telefone']").value = "";
@@ -68,6 +69,7 @@ export default function AddAgenda() {
       document.querySelector("input[name='horario']").value = "";
       document.querySelector("textarea[name='observacao']").value = "";
     }
+    dispatch({ type: "setStatus", payload: "ready" });
   };
 
   return (

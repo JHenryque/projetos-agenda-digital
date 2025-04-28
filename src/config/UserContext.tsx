@@ -28,16 +28,30 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
     case "setStatus":
       return { ...state, status: action.payload };
     case "setLembrete":
-      console.log("reducer", action.payload);
+      //console.log("reducer", action.payload);
       return {
         ...state,
         lembretes: [...state.lembretes, action.payload],
       };
     case "setAgenda":
-      console.log("reducer", action.payload);
+      //console.log("reducer", action.payload);
       return {
         ...state,
         agendamento: [...state.agendamento, action.payload],
+      };
+    case "setDeleteLembrete":
+      console.log("id: ", action.payload);
+      return {
+        ...state,
+        lembretes: state.lembretes.filter((item) => item.id !== action.payload),
+      };
+    case "setDeleteAgendamento":
+      console.log("id: ", action.payload);
+      return {
+        ...state,
+        agendamento: state.agendamento.filter(
+          (item) => item.id !== action.payload
+        ),
       };
     default:
       throw new Error("Ação desconhecida");

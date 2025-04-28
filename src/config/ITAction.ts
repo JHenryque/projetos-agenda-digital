@@ -1,5 +1,6 @@
 interface Lembretes {
   id: number;
+  tipo: string;
   name: string;
   descricao: string;
   date: string; // formato: dd/mm/aaaa
@@ -17,6 +18,7 @@ interface Lembretes {
 
 interface Agendamento {
   id: number;
+  tipo: string;
   name: string;
   telefone: string;
   endereco: string;
@@ -65,7 +67,9 @@ export const initialState: AgendaState = {
 export type AgendaAction =
   | { type: "setStatus"; payload: Status }
   | { type: "setLembrete"; payload: Lembretes }
-  | { type: "setAgenda"; payload: Agendamento };
+  | { type: "setAgenda"; payload: Agendamento }
+  | { type: "setDeleteLembrete"; payload: Lembretes["id" | "tipo"] }
+  | { type: "setDeleteAgendamento"; payload: Agendamento["id" | "tipo"] };
 
 // a type AgendaAction descreve as diferentes actions das quais podem ser executadas no reducer (AgendaUserContext, AgendaReducer)
 
