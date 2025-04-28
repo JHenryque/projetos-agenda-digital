@@ -40,11 +40,11 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
         agendamento: [...state.agendamento, action.payload],
       };
     case "setDeleteLembrete":
-      console.log("id: ", action.payload);
       return {
         ...state,
         lembretes: state.lembretes.filter((item) => item.id !== action.payload),
       };
+
     case "setDeleteAgendamento":
       console.log("id: ", action.payload);
       return {
@@ -53,6 +53,15 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
           (item) => item.id !== action.payload
         ),
       };
+    case "setEditeLembrete": {
+      const id = state.lembretes.map((item) => item.id);
+      if (Number(id) === action.payload.id) {
+        return { ...state, lembretes: [...state.lembretes, action.payload] };
+      } else {
+        return state;
+      }
+    }
+
     default:
       throw new Error("Ação desconhecida");
   }

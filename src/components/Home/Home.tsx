@@ -3,13 +3,16 @@ import CardLembrete from "./CardLembrete/CardLembrete";
 import { UserContext } from "../../config/UserContext";
 import style from "./Home.module.css";
 import Loader from "../FullPageLoader/FullPageLoader";
+import { useState } from "react";
+import EditeLembrete from "../modal/EditeLembrete";
 
 export default function Home() {
   const { state, dispatch } = UserContext();
+  const [editLembrete, setEditLembrete] = useState(false);
 
-  function handlerEdtion(id: number) {
-    if (confirm(`Deseja editar? ${id}`)) {
-      console.log("vc clicou para editar", id);
+  function handlerEdtion() {
+    if (confirm(`Deseja editar?`)) {
+      setEditLembrete(true);
     }
   }
 
@@ -41,6 +44,7 @@ export default function Home() {
                   handlerEdtion={handlerEdtion}
                   handlerDelete={handlerDelete}
                 />
+                {editLembrete && <EditeLembrete />}
               </fieldset>
             </>
           ) : (

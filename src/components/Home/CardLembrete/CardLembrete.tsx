@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { UserContext } from "../../../config/UserContext";
 import style from "../Home.module.css";
 
@@ -5,7 +6,7 @@ export default function CardLembrete({
   handlerEdtion,
   handlerDelete,
 }: {
-  handlerEdtion: (id: number) => void;
+  handlerEdtion: () => void;
   handlerDelete: (id: number, tipo: any) => void;
 }) {
   const { state } = UserContext();
@@ -18,8 +19,10 @@ export default function CardLembrete({
       {state.lembretes.map((item) => (
         <div className={style.card_lembretes} key={item.id}>
           <div className={style.acoes}>
-            <span onClick={() => handlerEdtion(item.id)}>
-              <i className="fa-solid fa-pen"></i>
+            <span onClick={handlerEdtion}>
+              <Link to={`/edit-lembrete/${item.id}`}>
+                <i className="fa-solid fa-pen"></i>
+              </Link>
             </span>
             <span onClick={() => handlerDelete(item.id, item.tipo)}>
               <i className="fa-solid fa-trash"></i>

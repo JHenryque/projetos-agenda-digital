@@ -69,7 +69,8 @@ export type AgendaAction =
   | { type: "setLembrete"; payload: Lembretes }
   | { type: "setAgenda"; payload: Agendamento }
   | { type: "setDeleteLembrete"; payload: Lembretes["id" | "tipo"] }
-  | { type: "setDeleteAgendamento"; payload: Agendamento["id" | "tipo"] };
+  | { type: "setDeleteAgendamento"; payload: Agendamento["id" | "tipo"] }
+  | { type: "setEditeLembrete"; payload: Lembretes };
 
 // a type AgendaAction descreve as diferentes actions das quais podem ser executadas no reducer (AgendaUserContext, AgendaReducer)
 
