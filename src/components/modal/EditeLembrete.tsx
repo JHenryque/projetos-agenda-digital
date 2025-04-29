@@ -17,9 +17,13 @@ export default function EditeLembrete() {
 
     const idLembrete = Number(id);
 
-    const name = document.querySelector("input[name=name]")?.value;
-    const descricao = document.querySelector("textarea[name=descricao]")?.value;
-    const date = document.querySelector("input[name=date]")?.value;
+    const name =
+      document.querySelector<HTMLInputElement>("input[name=name]")?.value;
+    const descricao = document.querySelector<HTMLInputElement>(
+      "textarea[name=descricao]"
+    )?.value;
+    const date =
+      document.querySelector<HTMLInputElement>("input[name=date]")?.value;
     const newEditeLembrete = {
       id: idLembrete,
       tipo: "lembrete",

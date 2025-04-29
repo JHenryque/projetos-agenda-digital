@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useRef, useState } from "react";
 import style from "./modal.module.css";
 import { UserContext } from "../../config/UserContext";
 import { useNavigate, useParams } from "react-router";
@@ -9,6 +9,15 @@ export default function EditeAgenda() {
   const { state, dispatch } = UserContext();
   const navegate = useNavigate();
   const { id } = useParams();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const telefoneRef = useRef<HTMLInputElement>(null);
+  const enderecoRef = useRef<HTMLInputElement>(null);
+  const numeroRef = useRef<HTMLInputElement>(null);
+  const cidadeRef = useRef<HTMLInputElement>(null);
+  const barrioRef = useRef<HTMLInputElement>(null);
+  const data_agendadoRef = useRef<HTMLInputElement>(null);
+  const horarioRef = useRef<HTMLInputElement>(null);
+  const observacaoRef = useRef<HTMLTextAreaElement>(null);
 
   const agendamento = state.agendamento.find((item) => item.id === Number(id));
 
@@ -16,19 +25,15 @@ export default function EditeAgenda() {
     e.preventDefault();
 
     const idAgenda = Number(id);
-    const name = document.querySelector("input[name=name]")?.value;
-    const telefone = document.querySelector("input[name=telefone]")?.value;
-    const endereco = document.querySelector("input[name=endereco]")?.value;
-    const numero = document.querySelector("input[name=numero]")?.value;
-    const cidade = document.querySelector("input[name=cidade]")?.value;
-    const barrio = document.querySelector("input[name=barrio]")?.value;
-    const data_agendado = document.querySelector(
-      "input[name=data_agendado]"
-    )?.value;
-    const horario = document.querySelector("input[name=horario]")?.value;
-    const observacao = document.querySelector(
-      "textarea[name=observacao]"
-    )?.value;
+    const name = nameRef.current?.value;
+    const telefone = telefoneRef.current?.value;
+    const endereco = enderecoRef.current?.value;
+    const numero = numeroRef.current?.value;
+    const cidade = cidadeRef.current?.value;
+    const barrio = barrioRef.current?.value;
+    const data_agendado = data_agendadoRef.current?.value;
+    const horario = horarioRef.current?.value;
+    const observacao = observacaoRef.current?.value;
 
     if (
       !name ||
@@ -69,6 +74,7 @@ export default function EditeAgenda() {
         <input
           type="text"
           name="name"
+          ref={nameRef}
           placeholder="Digite o Nome"
           defaultValue={agendamento?.name}
         />
@@ -78,6 +84,7 @@ export default function EditeAgenda() {
           name="telefone"
           placeholder="Digite o Telefone"
           defaultValue={agendamento?.telefone}
+          ref={telefoneRef}
         />
         <label htmlFor="endereco">Endereço:</label>
         <input
@@ -85,6 +92,7 @@ export default function EditeAgenda() {
           name="endereco"
           placeholder="Digite o Endereço"
           defaultValue={agendamento?.endereco}
+          ref={enderecoRef}
         />
         <label htmlFor="numero">N°:</label>
         <input
@@ -92,6 +100,7 @@ export default function EditeAgenda() {
           name="numero"
           defaultValue={agendamento?.numero}
           placeholder="Digite o Numero da casa"
+          ref={numeroRef}
         />
         <label htmlFor="cidade">Cidade:</label>
         <input
@@ -99,6 +108,7 @@ export default function EditeAgenda() {
           name="cidade"
           placeholder="Digite a Cidade"
           defaultValue={agendamento?.cidade}
+          ref={cidadeRef}
         />
         <label htmlFor="barrio">Barrio:</label>
         <input
@@ -106,6 +116,7 @@ export default function EditeAgenda() {
           name="barrio"
           placeholder="Digite o Barrio"
           defaultValue={agendamento?.barrio}
+          ref={barrioRef}
         />
         <label htmlFor="data-agendada">Data Marcada:</label>
         <input
@@ -113,6 +124,7 @@ export default function EditeAgenda() {
           name="data_agendado"
           placeholder="Digite a Data Agendada"
           defaultValue={agendamento?.data_agendado}
+          ref={data_agendadoRef}
         />
         <label htmlFor="hora">Hora Marcada:</label>
         <input
@@ -120,12 +132,14 @@ export default function EditeAgenda() {
           name="horario"
           placeholder="Digite a Hora Marcada"
           defaultValue={agendamento?.horario}
+          ref={horarioRef}
         />
         <label htmlFor="observacao">Observação:</label>
         <textarea
           name="observacao"
           placeholder="Digite a o Observação"
           defaultValue={agendamento?.observacao}
+          ref={observacaoRef}
         ></textarea>
         {errors && <p className={style.errors}>{errors}</p>}
         <button>Salvar</button>

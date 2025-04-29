@@ -1,49 +1,26 @@
 interface Lembretes {
   id: number;
   tipo: string;
-  name: string;
-  descricao: string;
-  date: string; // formato: dd/mm/aaaa
+  name: string | undefined;
+  descricao: string | undefined;
+  date: string | undefined; // formato: dd/mm/aaaa
 }
 
-// const lembrete: Lembretes[] = [
-//   {
-//     id: 1,
-//     name: "DoAula de react",
-//     descricao: "Aula de react",
-//     date: "15/04/2025",
-//   },
-// ];
 // a interface agendamento data descreve a forma para o state da (data, AgendaState, AgendaAction)
 
 interface Agendamento {
   id: number;
   tipo: string;
-  name: string;
-  telefone: string;
-  endereco: string;
-  numero: string;
-  cidade: string;
-  barrio: string;
-  data_agendado: string; // formato: dd/mm/aaaa
-  horario: string; // formato: HH:MM - HH:MM
-  observacao: string;
+  name: string | undefined;
+  telefone: string | undefined;
+  endereco: string | undefined;
+  numero: string | undefined;
+  cidade: string | undefined;
+  barrio: string | undefined;
+  data_agendado: string | undefined; // formato: dd/mm/aaaa
+  horario: string | undefined; // formato: HH:MM - HH:MM
+  observacao: string | undefined;
 }
-
-// const agenda: Agendamento[] = [
-//   {
-//     id: 1,
-//     nome: "Do cliente",
-//     telefone: "(99) 99999-9999",
-//     endereco: "Rua Professor Fernando Souto",
-//     numero: "205",
-//     cidade: "Garanhuns",
-//     barrio: "Boa Vista",
-//     data_agendado: "15/04/2025",
-//     horario: "08:00 - 10:00",
-//     observacao: "Sem observação",
-//   },
-// ];
 
 // a interface agendamento data descreve a forma para o state da (data, AgendaState, AgendaAction)
 
