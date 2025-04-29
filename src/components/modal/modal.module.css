@@ -78,6 +78,16 @@ textarea::placeholder {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.404);
 }
 
+.success {
+  background-color: rgb(163, 240, 148);
+  padding: 1rem;
+  color: #0b8534f3;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.404);
+}
+
 @media only screen and (min-width: 828px) {
   .modal {
     width: 100%;

@@ -6,7 +6,7 @@ export default function CardLembrete({
   handlerEdtion,
   handlerDelete,
 }: {
-  handlerEdtion: () => void;
+  handlerEdtion: (typo: string) => void;
   handlerDelete: (id: number, tipo: any) => void;
 }) {
   const { state } = UserContext();
@@ -19,7 +19,7 @@ export default function CardLembrete({
       {state.lembretes.map((item) => (
         <div className={style.card_lembretes} key={item.id}>
           <div className={style.acoes}>
-            <span onClick={handlerEdtion}>
+            <span onClick={() => handlerEdtion(item.tipo)}>
               <Link to={`/edit-lembrete/${item.id}`}>
                 <i className="fa-solid fa-pen"></i>
               </Link>

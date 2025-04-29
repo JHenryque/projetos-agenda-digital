@@ -8,6 +8,7 @@ import AddAgenda from "./components/modal/AddAgenda.tsx";
 import AddLembrete from "./components/modal/AddLembrete.tsx";
 import { UserProvider } from "./config/UserContext.tsx";
 import EditeLembrete from "./components/modal/EditeLembrete.tsx";
+import EditeAgenda from "./components/modal/EditeAgenda.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -18,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/add-lembrete" element={<AddLembrete />} />
           <Route path="/edit-lembrete/:id" element={<EditeLembrete />} />
           <Route path="/add-agenda" element={<AddAgenda />} />
+          <Route path="/edit-agenda/:id" element={<EditeAgenda />} />
         </Route>
         <Route path="*" element={<FoundError />} />
       </Routes>

@@ -10,10 +10,7 @@ export default function EditeLembrete() {
   const navegate = useNavigate();
   const { id } = useParams();
 
-  console.log("id:", id);
-
   const lembretes = state.lembretes.find((item) => item.id === Number(id));
-  console.log("find", lembretes);
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
@@ -38,8 +35,6 @@ export default function EditeLembrete() {
     ) {
       setErrors("Preencha todos os campos!");
     } else {
-      console.log("Enviada com sucesso  !");
-
       dispatch({ type: "setEditeLembrete", payload: newEditeLembrete });
       dispatch({ type: "setStatus", payload: "ready" });
       setErrors("");
@@ -71,7 +66,7 @@ export default function EditeLembrete() {
           defaultValue={lembretes?.date}
           placeholder="Digite a data"
         />
-        {errors && <p className={style.errors}>{errors}</p>}
+        {errors && <p className={style.error}>{errors}</p>}
         <button onClick={handleOnSubmit} type="submit">
           Salvar
         </button>

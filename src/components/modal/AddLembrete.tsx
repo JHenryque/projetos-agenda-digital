@@ -8,28 +8,32 @@ export default function AddLembrete() {
   const [descricao, setDescricao] = useState("");
   const [date, setDate] = useState("");
   const [errors, setErrors] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const { state, dispatch } = UserContext();
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!name || !descricao || !date) {
       setErrors("Preencha todos os campos!");
     } else {
-      console.log("Enviada com sucesso  !");
+      console.log("Enviada com sucesso !");
+      setErrors("");
       const id = state.lembretes.length
         ? Math.max(...state.lembretes.map((todo) => todo.id)) + 1
         : 1;
-
       const newLembrete = { id, tipo: "lembrete", name, descricao, date };
       dispatch({ type: "setLembrete", payload: newLembrete });
-      setErrors("");
       dispatch({ type: "setStatus", payload: "ready" });
+      setSuccess("Enviada com sucesso!");
       setName("");
       setDescricao("");
       setDate("");
     }
+    setTimeout(() => {
+      setSuccess("");
+    }, 3000);
   };
 
   return (
@@ -57,6 +61,7 @@ export default function AddLembrete() {
           placeholder="Digite a data"
         />
         {errors && <p className={style.errors}>{errors}</p>}
+        {success && <p className={style.success}>{success}</p>}
         <button onClick={handleOnSubmit} type="submit">
           Salvar
         </button>

@@ -29,10 +29,11 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
       return { ...state, status: action.payload };
     case "setLembrete":
       //console.log("reducer", action.payload);
-      return {
-        ...state,
-        lembretes: [...state.lembretes, action.payload],
-      };
+      // localStorage.setItem(
+      //   "lembretes",
+      //   JSON.stringify([...state.lembretes, action.payload])
+      // );
+      return { ...state, lembretes: [...state.lembretes, action.payload] };
     case "setAgenda":
       //console.log("reducer", action.payload);
       return {
@@ -40,6 +41,12 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
         agendamento: [...state.agendamento, action.payload],
       };
     case "setDeleteLembrete":
+      localStorage.setItem(
+        "lembretes",
+        JSON.stringify(
+          state.lembretes.filter((item) => item.id !== action.payload)
+        )
+      );
       return {
         ...state,
         lembretes: state.lembretes.filter((item) => item.id !== action.payload),
@@ -47,6 +54,12 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
 
     case "setDeleteAgendamento":
       console.log("id: ", action.payload);
+      localStorage.setItem(
+        "agendamento",
+        JSON.stringify(
+          state.agendamento.filter((item) => item.id !== action.payload)
+        )
+      );
       return {
         ...state,
         agendamento: state.agendamento.filter(
@@ -54,14 +67,23 @@ function AgendaReducer(state: AgendaState, action: AgendaAction): AgendaState {
         ),
       };
     case "setEditeLembrete": {
-      const id = state.lembretes.map((item) => item.id);
-      if (Number(id) === action.payload.id) {
-        return { ...state, lembretes: [...state.lembretes, action.payload] };
-      } else {
-        return state;
-      }
+      const id = state.lembretes
+        .map((item) => item.id)
+        .indexOf(action.payload.id);
+      const lembretes = [...state.lembretes];
+      lembretes[id] = action.payload;
+      localStorage.setItem("lembretes", JSON.stringify([...lembretes]));
+      return { ...state, lembretes };
     }
-
+    case "setEditeAgendamento": {
+      const id = state.agendamento
+        .map((item) => item.id)
+        .indexOf(action.payload.id);
+      const agendamento = [...state.agendamento];
+      agendamento[id] = action.payload;
+      localStorage.setItem("agendamento", JSON.stringify([...agendamento]));
+      return { ...state, agendamento };
+    }
     default:
       throw new Error("Ação desconhecida");
   }

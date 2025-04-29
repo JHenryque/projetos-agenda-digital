@@ -3,16 +3,22 @@ import CardLembrete from "./CardLembrete/CardLembrete";
 import { UserContext } from "../../config/UserContext";
 import style from "./Home.module.css";
 import Loader from "../FullPageLoader/FullPageLoader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditeLembrete from "../modal/EditeLembrete";
+import EditeAgenda from "../modal/EditeAgenda";
 
 export default function Home() {
   const { state, dispatch } = UserContext();
   const [editLembrete, setEditLembrete] = useState(false);
+  const [editAgenda, setEditAgenda] = useState(false);
 
-  function handlerEdtion() {
+  function handlerEdtion(tipo: string) {
     if (confirm(`Deseja editar?`)) {
-      setEditLembrete(true);
+      if (tipo === "lembrete") {
+        setEditLembrete(true);
+      } else {
+        setEditAgenda(true);
+      }
     }
   }
 
@@ -27,6 +33,11 @@ export default function Home() {
     dispatch({ type: "setStatus", payload: "ready" });
     return id;
   }
+
+  useEffect(() => {
+    localStorage.setItem("lembretes", JSON.stringify(state.lembretes));
+    localStorage.setItem("agendamento", JSON.stringify(state.agendamento));
+  }, [state.lembretes, state.agendamento]);
 
   return (
     <section className={style.container_home}>
@@ -60,6 +71,7 @@ export default function Home() {
                   handlerEdtion={handlerEdtion}
                   handlerDelete={handlerDelete}
                 />
+                {editAgenda && <EditeAgenda />}
               </fieldset>
             ) : (
               <h2>Agenda Vazia</h2>

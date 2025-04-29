@@ -1,10 +1,11 @@
+import { Link } from "react-router";
 import { UserContext } from "../../../config/UserContext";
 import style from "../Home.module.css";
 export default function CardAgenda({
   handlerEdtion,
   handlerDelete,
 }: {
-  handlerEdtion: (id: number) => void;
+  handlerEdtion: (tipo: string) => void;
   handlerDelete: (id: number, tipo: any) => void;
 }) {
   const { state } = UserContext();
@@ -14,8 +15,10 @@ export default function CardAgenda({
       {state.agendamento.map((item) => (
         <div className={style.card_agenda} key={item.id}>
           <div className={style.acoes}>
-            <span onClick={() => handlerEdtion(item.id)}>
-              <i className="fa-solid fa-pen"></i>
+            <span onClick={() => handlerEdtion(item.tipo)}>
+              <Link to={`/edit-agenda/${item.id}`}>
+                <i className="fa-solid fa-pen"></i>
+              </Link>
             </span>
             <span onClick={() => handlerDelete(item.id, item.tipo)}>
               <i className="fa-solid fa-trash"></i>

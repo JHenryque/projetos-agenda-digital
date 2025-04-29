@@ -7,6 +7,7 @@ import { UserContext } from "../../config/UserContext";
 export default function AddAgenda() {
   const { state, dispatch } = UserContext();
   const [errors, setErrors] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
   //const navigate = useNavigate();
 
   const handleOnSubmit = (e: any) => {
@@ -57,8 +58,9 @@ export default function AddAgenda() {
         observacao,
       };
       dispatch({ type: "setAgenda", payload: newAgenda });
-      dispatch({ type: "setStatus", payload: "fetching" });
+
       setErrors("");
+      setSuccess("Agendamento feito com sucesso!");
       document.querySelector("input[name='name']").value = "";
       document.querySelector("input[name='telefone']").value = "";
       document.querySelector("input[name='endereco']").value = "";
@@ -68,8 +70,10 @@ export default function AddAgenda() {
       document.querySelector("input[name='data_agendado']").value = "";
       document.querySelector("input[name='horario']").value = "";
       document.querySelector("textarea[name='observacao']").value = "";
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
     }
-    dispatch({ type: "setStatus", payload: "ready" });
   };
 
   return (
@@ -106,6 +110,7 @@ export default function AddAgenda() {
           placeholder="Digite a o Observação"
         ></textarea>
         {errors && <p className={style.errors}>{errors}</p>}
+        {success && <p className={style.success}>{success}</p>}
         <button>Salvar</button>
       </form>
     </div>
