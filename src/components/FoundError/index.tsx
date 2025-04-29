@@ -1,8 +1,9 @@
 import { Link } from "react-router";
+import "../../index.css";
 
 export default function FoundError() {
   return (
-    <div>
+    <div className="not-found">
       <h1>
         <i>STATUS:</i> 404
       </h1>

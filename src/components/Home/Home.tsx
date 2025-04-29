@@ -6,6 +6,7 @@ import Loader from "../FullPageLoader/FullPageLoader";
 import { useEffect, useState } from "react";
 import EditeLembrete from "../modal/EditeLembrete";
 import EditeAgenda from "../modal/EditeAgenda";
+import { Link } from "react-router";
 
 export default function Home() {
   const { state, dispatch } = UserContext();
@@ -39,6 +40,17 @@ export default function Home() {
     localStorage.setItem("agendamento", JSON.stringify(state.agendamento));
   }, [state.lembretes, state.agendamento]);
 
+  const removerDados = async ({ tipo }: { tipo: string }) => {
+    if (confirm(`Deseja remover todos os ${tipo}s?`)) {
+      if (tipo === "lembrete") {
+        localStorage.removeItem("lembretes");
+      } else {
+        localStorage.removeItem("agendamento");
+      }
+    }
+    return window.location.reload();
+  };
+
   return (
     <section className={style.container_home}>
       {state.status === "fetching" ? (
@@ -50,6 +62,12 @@ export default function Home() {
           {state.lembretes.length > 0 ? (
             <>
               <fieldset className={style.lembretes}>
+                <button
+                  className={style.button}
+                  onClick={() => removerDados({ tipo: "lembrete" })}
+                >
+                  Remover todos
+                </button>
                 <legend>Lembretes</legend>
                 <CardLembrete
                   handlerEdtion={handlerEdtion}
@@ -59,12 +77,23 @@ export default function Home() {
               </fieldset>
             </>
           ) : (
-            <h2>Lembretes Vazios</h2>
+            <h3>
+              Lembretes Vazio{" "}
+              <Link to="/add-lembrete">
+                <button>Adicionar lembrete</button>
+              </Link>
+            </h3>
           )}
 
           <div className="list_agenda">
             {state.agendamento.length > 0 ? (
               <fieldset className={style.agenda}>
+                <button
+                  className={style.button}
+                  onClick={() => removerDados({ tipo: "agendamento" })}
+                >
+                  Remover todos
+                </button>
                 <legend>Agenda</legend>
 
                 <CardAgenda
@@ -74,7 +103,12 @@ export default function Home() {
                 {editAgenda && <EditeAgenda />}
               </fieldset>
             ) : (
-              <h2>Agenda Vazia</h2>
+              <h3>
+                Agendamento Vazio{" "}
+                <Link to="/add-agenda">
+                  <button>Adicionar agendamento</button>
+                </Link>
+              </h3>
             )}
           </div>
         </>

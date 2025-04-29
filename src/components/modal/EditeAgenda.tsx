@@ -37,9 +37,7 @@ export default function EditeAgenda() {
       !numero ||
       !cidade ||
       !barrio ||
-      data_agendado == "" ||
-      horario == "" ||
-      observacao == ""
+      data_agendado == ""
     ) {
       setErrors("*Preencha todos os campos!");
     } else {
